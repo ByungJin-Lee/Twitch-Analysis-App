@@ -1,0 +1,22 @@
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\bin\Debug\Twitch Analysis App.exe.config
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\bin\Debug\Twitch Analysis App.exe
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\bin\Debug\Twitch Analysis App.pdb
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App.csprojAssemblyReference.cache
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\MainWindow.g.cs
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\App.g.cs
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App_MarkupCompile.cache
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App_MarkupCompile.lref
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\MainWindow.baml
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App.g.resources
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch_Analysis_App.Properties.Resources.resources
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App.csproj.GenerateResource.cache
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App.csproj.CoreCompileInputs.cache
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App.exe
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Twitch Analysis App.pdb
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\AnalysisView.g.cs
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\ConfigurationView.g.cs
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\DownloadView.g.cs
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\AnalysisView.baml
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\ConfigurationView.baml
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\DownloadView.baml

@@ -1,0 +1,172 @@
+﻿<Window x:Class="Twitch_Analysis_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ViewModels="clr-namespace:Twitch_Analysis_App.ViewModels"
+        xmlns:Views="clr-namespace:Twitch_Analysis_App.Views"
+        xmlns:local="clr-namespace:Twitch_Analysis_App"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="900"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="#181735">
+
+    <Window.Resources>
+        <DataTemplate x:Name="AnalysisTemplate" DataType="{x:Type ViewModels:AnalysisViewModel}">
+            <Views:AnalysisView DataContext="{Binding}"></Views:AnalysisView>
+        </DataTemplate>
+        <DataTemplate x:Name="ConfigurationTemplate" DataType="{x:Type ViewModels:ConfigurationViewModel}">
+            <Views:ConfigurationView DataContext="{Binding}"></Views:ConfigurationView>
+        </DataTemplate>
+        <DataTemplate x:Name="DownloadTemplate" DataType="{x:Type ViewModels:DownloadViewModel}">
+            <Views:DownloadView DataContext="{Binding}"></Views:DownloadView>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Resources>
+            <ControlTemplate x:Key="tabRadioButton" TargetType="{x:Type RadioButton}">
+                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+                
+                <ControlTemplate.Triggers>
+                    <Trigger
+                        Property="IsChecked"
+                        Value="false">
+                        <Setter
+                            Property="Foreground"
+                            Value="LightGray"/>
+                    </Trigger>
+                    <Trigger
+                        Property="IsChecked"
+                        Value="true">
+                        <Setter
+                            Property="Foreground"
+                            Value="White"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#0F0F2D"
+              Grid.ColumnSpan="2"
+              MouseDown="Grid_MouseDown">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Menu-->
+
+            <RadioButton Template="{StaticResource tabRadioButton}"
+                        Content="Twitch Analysis"                        
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontFamily="Assets/Fonts/#Dosis"
+                        FontWeight="Medium"    
+                         Click="clickTabButton"
+                        Grid.Column="1"
+                        IsChecked="True">
+
+            </RadioButton>
+
+            <RadioButton Template="{StaticResource tabRadioButton}"
+                        Content="Configuration"                        
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                         Click="clickTabButton"
+                        FontFamily="Assets/Fonts/#Dosis"
+                        FontWeight="Medium"                             
+                        Grid.Column="2">
+
+            </RadioButton>
+
+            <RadioButton Template="{StaticResource tabRadioButton}"
+                        Content="Download"                        
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                         Click="clickTabButton"
+                        FontFamily="Assets/Fonts/#Dosis"
+                        FontWeight="Medium"                         
+                        Grid.Column="3">
+
+            </RadioButton>
+
+            <TextBlock Text="Chatting"
+                       Foreground="White"
+                       Grid.Column="6"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Assets/Fonts/#Dosis"
+                       FontWeight="Medium"/>
+
+            <Grid Grid.Column="8" Grid.Row="0" Margin="2,2,2,2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Content="_"                                  
+                    Foreground="White"
+                        Grid.Column="0"
+                    FontWeight="Bold" Click="minimizeClick">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Assets/Fonts/#Dosis"/>
+                            <Setter Property="Background" Value="LightGreen"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Content="X"                                  
+                    Foreground="White"
+                        Grid.Column="1"
+                    FontWeight="Bold" Click="exitClick">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="TextElement.FontFamily" Value="Assets/Fonts/#Dosis"/>
+                            <Setter Property="Background" Value="#FE6584"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+
+        </Grid>
+
+        <!--Woring Panel-->
+
+        
+        <ContentControl Grid.Row="1"
+                        Margin="5,5,5,5"
+                        Content="{Binding}"/>
+
+        <!--Chatting Panel-->
+
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="5,5,5,5">
+            
+        </StackPanel>
+
+    </Grid>
+</Window>
