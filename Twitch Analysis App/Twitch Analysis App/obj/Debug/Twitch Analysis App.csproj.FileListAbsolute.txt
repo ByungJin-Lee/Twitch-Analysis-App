@@ -20,3 +20,4 @@ D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Gen
 D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\AnalysisView.baml
 D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\ConfigurationView.baml
 D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\DownloadView.baml
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\App.baml

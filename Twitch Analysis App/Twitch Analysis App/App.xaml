@@ -1,9 +1,12 @@
 ﻿<Application x:Class="Twitch_Analysis_App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Twitch_Analysis_App"
+             xmlns:local="clr-namespace:Twitch_Analysis_App"             
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <SolidColorBrush x:Key="WarningBrush"
+                         Color="LightCoral"/>
+
     </Application.Resources>
 </Application>

@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Twitch_Analysis_App.Views"
              xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"
+             xmlns:Converter="clr-namespace:Twitch_Analysis_App.Converter"
+             xmlns:Selector="clr-namespace:Twitch_Analysis_App.Selector"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -18,32 +20,91 @@
         </Grid.RowDefinitions>
 
         <Grid.Resources>
-            <DataTemplate x:Key="Message_Basic">
-                <StackPanel>
-                    <TextBlock Text="{Binding Name}"
-                               Visibility="{Binding IsMine}"/>
-                    <Border Background="{Binding IsMine}"
-                            CornerRadius="5" Margin="0,3">
-                        <TextBlock Text="{Binding Chat}" TextWrapping="Wrap" Margin="5,3,5,7"/>
+
+            <Converter:WarningToBrushConverter x:Key="WarningToBrushConverter"
+                                               TrueBrush="#FFCCCB"
+                                               FalseBrush="#90EE90"/>
+
+
+            <DataTemplate x:Key="Log_Left">
+                <StackPanel Margin="0,1">
+                    <DockPanel>
+                        <TextBlock Text="{Binding Source}" FontWeight="Bold" Foreground="White"/>
+                        <TextBlock Margin="5,0,0,0" VerticalAlignment="Bottom" Foreground="White" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="9"/>    
+                    </DockPanel>
+                    <Border Background="{Binding Warning, Converter={StaticResource WarningToBrushConverter}}"
+                            CornerRadius="5"
+                            Padding="8,2"
+                            BorderThickness="0">
+                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="2,1,1,2" Foreground="Black"/>
                     </Border>
-                    <TextBlock Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="8"/>
                 </StackPanel>
             </DataTemplate>
 
+            <DataTemplate x:Key="Log_Right">
+                <StackPanel Margin="0,1">
+                    <DockPanel>
+                        <TextBlock HorizontalAlignment="Right" Foreground="White" Margin="5,0,0,0" VerticalAlignment="Bottom" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="9"/>
+                        <TextBlock HorizontalAlignment="Right" Foreground="White" Text="{Binding Source}" FontWeight="Bold"/>
+                    </DockPanel>
+                    <Border Background="{Binding Warning, Converter={StaticResource WarningToBrushConverter}}"
+                            CornerRadius="5"
+                            Padding="8,2"
+                            BorderThickness="0">
+                        <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="2,1,1,2" Foreground="Black"/>
+                    </Border>
+                </StackPanel>
+            </DataTemplate>
+
+
+            <Style x:Key="Style_Log_Left" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <ContentPresenter x:Name="PART_ListBoxItem" 
+                                  HorizontalAlignment="Left" 
+                                  Margin="5,0,20,5"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="Style_Log_Right" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <ContentPresenter x:Name="PART_ListBoxItem" 
+                                  HorizontalAlignment="Right" 
+                                  Margin="20,0,5,5"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style TargetType="{x:Type ListBox}">
-                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Background" Value="Transparent"/>
             </Style>
             <Style TargetType="{x:Type ListBoxItem}">
-                <Setter Property="Foreground" Value="Aquamarine"/>
+                <Setter Property="Foreground" Value="White"/>
             </Style>
+
+            <Selector:LogTemplateSelector x:Key="LogTemplateSelector"
+                                          LeftTemplate="{StaticResource Log_Left}" RightTemplate="{StaticResource Log_Right}"
+                                          PropertyToCheck="Warning" PropertyValue="True"/>
+
+            <Selector:LogStyleSelector x:Key="LogStyleSelector"
+                                       LeftStyle="{StaticResource Style_Log_Left}" RightStyle="{StaticResource Style_Log_Right}"
+                                       PropertyToCheck="Warning" PropertyValue="True"/>
+
         </Grid.Resources>
 
-        <ListBox Grid.Row="1" Grid.Column="0" ItemTemplate="{StaticResource Message_Basic}" Margin="0,5,5,0">
+        <ListBox Grid.Row="1" Grid.Column="0" 
+                 ItemTemplateSelector="{StaticResource LogTemplateSelector}" Margin="0,5,5,0"
+                 ItemContainerStyleSelector="{StaticResource LogStyleSelector}">
             <ListBox.ItemsSource >
-                <x:Array Type="{x:Type Structure:Message}">
-                    <Structure:Message Name="X Friend" Chat="Charles~ R u there?" Time="2018-03-01 12:24:33" IsMine="False"/>
-                    <Structure:Message Name="Me" Chat="Cs~ R here?" Time="2018-03-01 12:24:33" IsMine="True"/>
-                    <Structure:Message Name="X Friend" Chat="Chs~ u there?" Time="2018-03-01 12:24:33" IsMine="False"/>
+                <x:Array Type="{x:Type Structure:Log}">
+                    <Structure:Log Source="X Friend" Content="Charles~ R u there?" Time="2018-03-01 12:24:33" Warning="False"/>
+                    <Structure:Log Source="Me" Content="Cs~ R here?" Time="2018-03-01 12:24:33" Warning="True"/>
+                    <Structure:Log Source="X Friend" Content="Chs~ u there?" Time="2018-03-01 12:24:33" Warning="False"/>
                 </x:Array>
             </ListBox.ItemsSource>
         </ListBox>
