@@ -63,6 +63,8 @@
     <Compile Include="Structure\Log.cs" />
     <Compile Include="Structure\Message.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
+    <Compile Include="ViewModels\Command\TabCommand.cs" />
+    <Compile Include="ViewModels\TabViewModel.cs" />
     <Compile Include="Views\ConfigurationView.xaml.cs">
       <DependentUpon>ConfigurationView.xaml</DependentUpon>
     </Compile>

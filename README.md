@@ -22,3 +22,8 @@ DataBase - MongoDB
 Commit Log
 ---
 + 1.0.0 - Init Application Setting
+
++ 1.1.0 - Tab
+    + created TabViewModel
+    + created TabCommand
+    + binded XAML to ViewModel

@@ -25,6 +25,8 @@
         <DataTemplate x:Name="DownloadTemplate" DataType="{x:Type ViewModels:DownloadViewModel}">
             <Views:DownloadView DataContext="{Binding}"></Views:DownloadView>
         </DataTemplate>
+
+        <ViewModels:TabViewModel x:Key="TabViewModel"/>
     </Window.Resources>
 
     <!--#endregion-->
@@ -114,7 +116,8 @@
                         HorizontalAlignment="Center"
                         FontFamily="Assets/Fonts/#Dosis"
                         FontWeight="Medium"    
-                         Click="clickTabButton"
+                        Command="{Binding Path=TabCommand, Source={StaticResource TabViewModel}}" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"                        
                         Grid.Column="1"
                         IsChecked="True">
 
@@ -124,7 +127,8 @@
                         Content="Configuration"                        
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                         Click="clickTabButton"
+                         Command="{Binding Path=TabCommand, Source={StaticResource TabViewModel}}" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"         
                         FontFamily="Assets/Fonts/#Dosis"
                         FontWeight="Medium"                             
                         Grid.Column="2">
@@ -135,7 +139,8 @@
                         Content="Download"                        
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
-                         Click="clickTabButton"
+                         Command="{Binding Path=TabCommand, Source={StaticResource TabViewModel}}" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"         
                         FontFamily="Assets/Fonts/#Dosis"
                         FontWeight="Medium"                         
                         Grid.Column="3">
@@ -193,7 +198,7 @@
         
         <ContentControl Grid.Row="1"
                         Margin="5,5,5,5"
-                        Content="{Binding}"/>
+                        Content="{Binding Path=Tab, Source={StaticResource TabViewModel}}"/>
 
         <!--#endregion-->
         
