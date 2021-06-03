@@ -8,5 +8,11 @@
         <SolidColorBrush x:Key="WarningBrush"
                          Color="LightCoral"/>
 
+        <SolidColorBrush x:Key="DefaultChatBrush"
+                         Color="Yellow"/>
+
+        <SolidColorBrush x:Key="DefaultChatTitleBrush"
+                         Color="White"/>
+
     </Application.Resources>
 </Application>

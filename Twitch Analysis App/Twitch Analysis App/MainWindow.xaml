@@ -6,12 +6,15 @@
         xmlns:ViewModels="clr-namespace:Twitch_Analysis_App.ViewModels"
         xmlns:Views="clr-namespace:Twitch_Analysis_App.Views"
         xmlns:local="clr-namespace:Twitch_Analysis_App"
+        xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="#181735">
 
+    <!--#region Window Resource-->
+    
     <Window.Resources>
         <DataTemplate x:Name="AnalysisTemplate" DataType="{x:Type ViewModels:AnalysisViewModel}">
             <Views:AnalysisView DataContext="{Binding}"></Views:AnalysisView>
@@ -24,7 +27,12 @@
         </DataTemplate>
     </Window.Resources>
 
+    <!--#endregion-->
+    
     <Grid>
+        
+        <!--#region Grid Resource-->
+        
         <Grid.Resources>
             <ControlTemplate x:Key="tabRadioButton" TargetType="{x:Type RadioButton}">
                 <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
@@ -46,8 +54,28 @@
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
-        </Grid.Resources>
 
+            <DataTemplate x:Key="ChattingTemplate">
+                <StackPanel>
+                    <DockPanel>
+                        <TextBlock Foreground="{StaticResource DefaultChatTitleBrush}" Text="{Binding Name}"/>
+                        <TextBlock Margin="4,0,0,0" Foreground="{StaticResource DefaultChatTitleBrush}" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="9" VerticalAlignment="Bottom"/>
+                    </DockPanel>
+                    <Border Padding="5,1" CornerRadius="5" Margin="0,2,0,0"
+                           Background="{StaticResource DefaultChatBrush}"
+                            BorderThickness="0">
+                        <TextBlock Text="{Binding Chat}" TextWrapping="Wrap"/>
+                    </Border>
+                </StackPanel>
+            </DataTemplate>
+            
+            
+        </Grid.Resources>
+        
+        <!--#endregion-->
+
+        <!--#region Grid Definition-->
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
@@ -57,7 +85,11 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
+        
+        <!--#endregion-->
+        
+        <!--#region Menubar-->        
+        
         <Grid Background="#0F0F2D"
               Grid.ColumnSpan="2"
               MouseDown="Grid_MouseDown">
@@ -74,7 +106,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <!--Menu-->
+            <!--#region Menu-->
 
             <RadioButton Template="{StaticResource tabRadioButton}"
                         Content="Twitch Analysis"                        
@@ -149,24 +181,40 @@
                         </Style>
                     </Button.Style>
                 </Button>
+
             </Grid>
-
+            <!--#endregion-->
+            
         </Grid>
-
-        <!--Woring Panel-->
-
+        
+        <!--#endregion-->
+                
+        <!--#region Content-->
         
         <ContentControl Grid.Row="1"
                         Margin="5,5,5,5"
                         Content="{Binding}"/>
 
-        <!--Chatting Panel-->
-
-        <StackPanel Grid.Row="1"
+        <!--#endregion-->
+        
+        <!--#region Chatting-->        
+        <Border BorderBrush="Wheat"
+                    BorderThickness="1"
+                    Grid.Row="1"
                     Grid.Column="1"
-                    Margin="5,5,5,5">
-            
-        </StackPanel>
+                    Margin="5,5"
+                    Background="#000051">
+            <ListBox Background="Transparent" ItemTemplate="{StaticResource ChattingTemplate}" BorderThickness="0">
+                <ListBox.ItemsSource>
+                    <x:Array Type="{x:Type Structure:Message}">
+                        <Structure:Message Name="Hello" Time="2018-03-01 12:24:33" Chat="Hehehe" IsMine="False"/>
+                        <Structure:Message Name="Youngman" Time="2018-03-01 12:24:33" Chat="23" IsMine="True"/>
+                        <Structure:Message Name="HelloBot" Time="2018-03-01 12:24:33" Chat="Heasdfasfsa" IsMine="False"/>
+                    </x:Array>
+                </ListBox.ItemsSource>
+            </ListBox>
+        </Border>
+        <!--#endregion-->
 
     </Grid>
 </Window>
