@@ -19,6 +19,28 @@ DataBase - MongoDB
     + At first, I think that i choose Electron but Electron Application is so big in Volume.
     + As that reason, I select C# WPF.
 
+TODO List
+---
++ UI Design
+    + Whole Layout Design
+    + Chat Layout Design
+    + Chat Item Design
+    + DataBase Tab Design
+    + DownLoad Tab Design
+    + Analysis Tab Design
+    + Download Tab Design
++ ViewModel
+    + Chat View
+    + Configuration View
+    + DataBase Collection View    
+    + XLSX Download View
++ Model
+    + TCPClient for connecting IRC Server
+    + DataBase Interaction
+    + Management Chatting
+    + Configuration File I/O
+    + XLSX File Output
+
 Commit Log
 ---
 + 1.0.0 - Init Application Setting
