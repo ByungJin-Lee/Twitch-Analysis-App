@@ -6,7 +6,7 @@
         xmlns:ViewModels="clr-namespace:Twitch_Analysis_App.ViewModels"
         xmlns:Views="clr-namespace:Twitch_Analysis_App.Views"
         xmlns:local="clr-namespace:Twitch_Analysis_App"
-        xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"
+        xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"                
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900"
         WindowStyle="None"
@@ -14,18 +14,8 @@
         Background="#181735">
 
     <!--#region Window Resource-->
-    
-    <Window.Resources>
-        <DataTemplate x:Name="AnalysisTemplate" DataType="{x:Type ViewModels:AnalysisViewModel}">
-            <Views:AnalysisView DataContext="{Binding}"></Views:AnalysisView>
-        </DataTemplate>
-        <DataTemplate x:Name="ConfigurationTemplate" DataType="{x:Type ViewModels:ConfigurationViewModel}">
-            <Views:ConfigurationView DataContext="{Binding}"></Views:ConfigurationView>
-        </DataTemplate>
-        <DataTemplate x:Name="DownloadTemplate" DataType="{x:Type ViewModels:DownloadViewModel}">
-            <Views:DownloadView DataContext="{Binding}"></Views:DownloadView>
-        </DataTemplate>
 
+    <Window.Resources>
         <ViewModels:TabViewModel x:Key="TabViewModel"/>
     </Window.Resources>
 
@@ -111,7 +101,7 @@
             <!--#region Menu-->
 
             <RadioButton Template="{StaticResource tabRadioButton}"
-                        Content="Twitch Analysis"                        
+                        Content="Analysis"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         FontFamily="Assets/Fonts/#Dosis"

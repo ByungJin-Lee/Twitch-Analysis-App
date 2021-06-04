@@ -12,7 +12,7 @@ using Twitch_Analysis_App.Views;
 namespace Twitch_Analysis_App.ViewModels
 {
     class TabViewModel : INotifyPropertyChanged
-    {                        
+    {                                
         public TabViewModel()
         {
             TabCommand = new TabCommand(work, canExcuted);
@@ -44,9 +44,8 @@ namespace Twitch_Analysis_App.ViewModels
                 string selected = (parmeter as RadioButton).Content.ToString();                
                 switch (selected)
                 {
-                    case "Twitch Analysis":
-                        this.Tab = new AnalysisView();
-                        MessageBox.Show("1");
+                    case "Analysis":
+                        this.Tab = new AnalysisView();                        
                         break;
                     case "Configuration":
                         this.Tab =  new ConfigurationView();

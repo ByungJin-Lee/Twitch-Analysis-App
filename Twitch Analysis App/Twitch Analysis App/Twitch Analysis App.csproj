@@ -57,13 +57,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converter\WarningToBrushConverter.cs" />
+    <Compile Include="Models\TwitchClient.cs" />
+    <Compile Include="ViewModels\Converter\WarningToBrushConverter.cs" />
     <Compile Include="Selector\LogStyleSelector.cs" />
     <Compile Include="Selector\LogTemplateSelector.cs" />
     <Compile Include="Structure\Log.cs" />
     <Compile Include="Structure\Message.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="ViewModels\Command\TabCommand.cs" />
+    <Compile Include="ViewModels\Converter\TabTypeToStringConverter.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
     <Compile Include="Views\ConfigurationView.xaml.cs">
       <DependentUpon>ConfigurationView.xaml</DependentUpon>

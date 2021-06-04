@@ -49,3 +49,6 @@ Commit Log
     + created TabViewModel
     + created TabCommand
     + binded XAML to ViewModel
+
++ 1.1.1 - TODO List
+    + create TODO List
