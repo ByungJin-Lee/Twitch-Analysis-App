@@ -35,10 +35,10 @@ TODO List
     + DataBase Collection View    
     + XLSX Download View
 + Model
-    + TCPClient for connecting IRC Server
+    + ~~TCPClient for connecting IRC Server~~
     + DataBase Interaction
     + Management Chatting
-    + Configuration File I/O
+    + ~~Configuration File I/O~~
     + XLSX File Output
 
 Commit Log
@@ -52,3 +52,10 @@ Commit Log
 
 + 1.1.1 - TODO List
     + create TODO List
+   
++ 1.2.0 - Models
+    + created IRCClient
+        + TcpClient
+    + created Configuration
+        + File I/O
+        + EnviromentKeys
