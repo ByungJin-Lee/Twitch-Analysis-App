@@ -35,21 +35,26 @@ TODO List
     + DataBase Collection View    
     + XLSX Download View
 + Model
-    + ~~TCPClient for connecting IRC Server~~
+    + TCPClient for connecting IRC Server
+        + ~~Connect IRC Server~~
+        + ~~Get Message~~
+        + JOIN
+        + CHAT
+        + PART
     + DataBase Interaction
     + Management Chatting
     + ~~Configuration File I/O~~
     + XLSX File Output
-
++ Write Detail Comment
+   
 Commit Log
 ---
 + 1.0.0 - Init Application Setting
-
+   
 + 1.1.0 - Tab
     + created TabViewModel
     + created TabCommand
     + binded XAML to ViewModel
-
 + 1.1.1 - TODO List
     + create TODO List
    
@@ -59,3 +64,5 @@ Commit Log
     + created Configuration
         + File I/O
         + EnviromentKeys
++ 1.2.1 - More Detail
+    + READMD DOTO list

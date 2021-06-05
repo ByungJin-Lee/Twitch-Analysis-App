@@ -7,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace Twitch_Analysis_App.Models
 {
+    /// <summary>
+    /// Configuration File I/O
+    /// </summary>
     class Configuration
     {
         #region EnviromentKeys
+        /// <summary>
+        /// Enviroment Key for Configuration Access, Position        
+        /// </summary>
         class EnviromentKeys
         {
             public const short CLIENT_AUTH = 0;
@@ -25,6 +31,9 @@ namespace Twitch_Analysis_App.Models
 
         #region Variables
 
+        /// <summary>
+        /// Key Value for enviroment
+        /// </summary>
         private string[] keys = null;
 
         #endregion
@@ -32,6 +41,7 @@ namespace Twitch_Analysis_App.Models
         #region Constructor Destructor
         public Configuration()
         {
+            //Read Keys from Configuration File
             readKeys();
         }
 
@@ -44,7 +54,10 @@ namespace Twitch_Analysis_App.Models
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// Get Keys from Configuration File... If already has File then return true, not false
+        /// </summary>
+        /// <returns></returns>
         private bool readKeys()
         {
             try
@@ -58,7 +71,9 @@ namespace Twitch_Analysis_App.Models
                 return false;
             }
         }
-
+        /// <summary>
+        /// Save Keys in Configuration File
+        /// </summary>
         public void save()
         {
             using (StreamWriter writer = new StreamWriter(@"./TAConfiguration.txt"))
