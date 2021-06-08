@@ -29,18 +29,20 @@ TODO List
     + DownLoad Tab Design
     + Analysis Tab Design
     + Download Tab Design
+    + Twitch Tab Design
 + ViewModel
     + Chat View
     + Configuration View
     + DataBase Collection View    
     + XLSX Download View
 + Model
-    + TCPClient for connecting IRC Server
+    + ~~TCPClient for connecting IRC Server~~
         + ~~Connect IRC Server~~
         + ~~Get Message~~
-        + JOIN
-        + CHAT
-        + PART
+        + ~~JOIN~~
+        + ~~CHAT~~
+        + ~~PART~~
+        + ~~ChatEvent~~
     + DataBase Interaction
     + Management Chatting
     + ~~Configuration File I/O~~
@@ -66,3 +68,16 @@ Commit Log
         + EnviromentKeys
 + 1.2.1 - More Detail
     + READMD DOTO list
+   
++ 1.3.0 - Updated Model & ViewModel
+    + Model
+        + Improved IRCClient
+            + chatToChannel
+            + Join
+            + Part
+            + Chat Event
+    + ViewModel
+        + deleted Types
+        + created View(TwitchView)
+        + created ViewModel(TwitchViewModel)
+        + created Command(ConnectCommand)

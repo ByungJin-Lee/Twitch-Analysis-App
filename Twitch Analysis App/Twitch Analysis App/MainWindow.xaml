@@ -101,6 +101,19 @@
             <!--#region Menu-->
 
             <RadioButton Template="{StaticResource tabRadioButton}"
+                        Content="Twitch"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        FontFamily="Assets/Fonts/#Dosis"
+                        FontWeight="Medium"    
+                        Command="{Binding Path=TabCommand, Source={StaticResource TabViewModel}}" 
+                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}"                        
+                        Grid.Column="0"
+                        IsChecked="True">
+
+            </RadioButton>
+
+            <RadioButton Template="{StaticResource tabRadioButton}"
                         Content="Analysis"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
@@ -109,7 +122,7 @@
                         Command="{Binding Path=TabCommand, Source={StaticResource TabViewModel}}" 
                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}"                        
                         Grid.Column="1"
-                        IsChecked="True">
+                        IsChecked="False">
 
             </RadioButton>
 

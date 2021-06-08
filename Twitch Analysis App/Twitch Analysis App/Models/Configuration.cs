@@ -13,9 +13,6 @@ namespace Twitch_Analysis_App.Models
     class Configuration
     {
         #region EnviromentKeys
-        /// <summary>
-        /// Enviroment Key for Configuration Access, Position        
-        /// </summary>
         class EnviromentKeys
         {
             public const short CLIENT_AUTH = 0;
@@ -31,17 +28,13 @@ namespace Twitch_Analysis_App.Models
 
         #region Variables
 
-        /// <summary>
-        /// Key Value for enviroment
-        /// </summary>
-        private string[] keys = null;
+        static private string[] keys = null;
 
         #endregion
 
         #region Constructor Destructor
-        public Configuration()
+        static Configuration()
         {
-            //Read Keys from Configuration File
             readKeys();
         }
 
@@ -54,11 +47,8 @@ namespace Twitch_Analysis_App.Models
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Get Keys from Configuration File... If already has File then return true, not false
-        /// </summary>
-        /// <returns></returns>
-        private bool readKeys()
+
+        static private bool readKeys()
         {
             try
             {
@@ -71,10 +61,8 @@ namespace Twitch_Analysis_App.Models
                 return false;
             }
         }
-        /// <summary>
-        /// Save Keys in Configuration File
-        /// </summary>
-        public void save()
+
+        static public void save()
         {
             using (StreamWriter writer = new StreamWriter(@"./TAConfiguration.txt"))
             {
@@ -88,14 +76,14 @@ namespace Twitch_Analysis_App.Models
         #endregion
 
         #region Setter Getter
-        public string Client_auth { get => keys[EnviromentKeys.CLIENT_AUTH]; set => keys[EnviromentKeys.CLIENT_AUTH] = value; }
-        public string Client_secret_auth { get => keys[EnviromentKeys.CLIENT_SECECRET_AUTH]; set => keys[EnviromentKeys.CLIENT_SECECRET_AUTH] = value; }
-        public string Auth_token { get => keys[EnviromentKeys.AUTH_TOKEN]; set => keys[EnviromentKeys.AUTH_TOKEN] = value; }
-        public string Auth_irc_token { get => keys[EnviromentKeys.AUTH_IRC_TOKEN]; set => keys[EnviromentKeys.AUTH_IRC_TOKEN] = value; }
-        public string Database_name { get => keys[EnviromentKeys.DATABASE_NAME]; set => keys[EnviromentKeys.DATABASE_NAME] = value; }
-        public string Database_ip { get => keys[EnviromentKeys.DATABASE_IP]; set => keys[EnviromentKeys.DATABASE_IP] = value; }
-        public string Database_port { get => keys[EnviromentKeys.DATABASE_PORT]; set => keys[EnviromentKeys.DATABASE_PORT] = value; }
-        public string Collection_name { get => keys[EnviromentKeys.COLLECTION_NAME]; set => keys[EnviromentKeys.COLLECTION_NAME] = value; }
+        static public string Client_auth { get => keys[EnviromentKeys.CLIENT_AUTH]; set => keys[EnviromentKeys.CLIENT_AUTH] = value; }
+        static public string Client_secret_auth { get => keys[EnviromentKeys.CLIENT_SECECRET_AUTH]; set => keys[EnviromentKeys.CLIENT_SECECRET_AUTH] = value; }
+        static public string Auth_token { get => keys[EnviromentKeys.AUTH_TOKEN]; set => keys[EnviromentKeys.AUTH_TOKEN] = value; }
+        static public string Auth_irc_token { get => keys[EnviromentKeys.AUTH_IRC_TOKEN]; set => keys[EnviromentKeys.AUTH_IRC_TOKEN] = value; }
+        static public string Database_name { get => keys[EnviromentKeys.DATABASE_NAME]; set => keys[EnviromentKeys.DATABASE_NAME] = value; }
+        static public string Database_ip { get => keys[EnviromentKeys.DATABASE_IP]; set => keys[EnviromentKeys.DATABASE_IP] = value; }
+        static public string Database_port { get => keys[EnviromentKeys.DATABASE_PORT]; set => keys[EnviromentKeys.DATABASE_PORT] = value; }
+        static public string Collection_name { get => keys[EnviromentKeys.COLLECTION_NAME]; set => keys[EnviromentKeys.COLLECTION_NAME] = value; }
 
         #endregion
     }

@@ -21,3 +21,5 @@ D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Vie
 D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\ConfigurationView.baml
 D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\DownloadView.baml
 D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\App.baml
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\TwitchView.g.cs
+D:\Lab\Twitch-Analysis-App\Twitch Analysis App\Twitch Analysis App\obj\Debug\Views\TwitchView.baml

@@ -44,6 +44,9 @@ namespace Twitch_Analysis_App.ViewModels
                 string selected = (parmeter as RadioButton).Content.ToString();                
                 switch (selected)
                 {
+                    case "Twitch":
+                        this.Tab = new TwitchView();
+                        break;
                     case "Analysis":
                         this.Tab = new AnalysisView();                        
                         break;

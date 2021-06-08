@@ -14,13 +14,15 @@ namespace Twitch_Analysis_App.Models
         private string password = null;
         private int port = -1;
         private bool isRunning = false;
+        private string currentChannel = null;
+        private bool isJoin = false;
 
         private TcpClient client = null;
         private StreamWriter writer = null;
         private StreamReader reader = null;
         private Thread receiveMessageThread = null;
 
-        #endregion
+        #endregion     
 
         #region Methods
 
@@ -51,7 +53,7 @@ namespace Twitch_Analysis_App.Models
                 {
                     if ((message = Console.ReadLine()) == "EXIT")
                         break;
-                    sendRawAndFlush(message);
+                    command(message);
                 }
             }
             catch (Exception x)
@@ -68,7 +70,64 @@ namespace Twitch_Analysis_App.Models
 
         #endregion
 
-        #region Thread Methods
+        #region IRC Methods
+
+        public void command(string cmd)
+        {
+            if (cmd.StartsWith("!"))
+            {
+                chatToChannel(cmd.Substring(1));
+            }
+            else
+            {
+                sendRawAndFlush(cmd);
+            }
+        }
+        public void joinChannel(string channel)
+        {
+            currentChannel = channel;
+            if (!String.IsNullOrEmpty(currentChannel) && !isJoin)
+            {
+                sendRawAndFlush("JOIN #" + currentChannel);
+                isJoin = true;
+                comment("Channel", "Join Channel");
+            }
+            else
+            {
+                comment("Channel", "Not right condition(already join or channel is null)");
+            }
+        }
+
+        public void outChannel()
+        {
+            if (isJoin && String.IsNullOrEmpty(currentChannel))
+            {
+                sendRawAndFlush("PART #" + currentChannel);
+                currentChannel = null;
+                isJoin = false;
+                comment("Channel", "Out from Channel");
+            }
+            else
+            {
+                comment("Channel", "Not right condition(already out or channel is null)");
+            }
+        }
+
+        public void chatToChannel(string message)
+        {
+            if (!String.IsNullOrEmpty(currentChannel) && isJoin && !String.IsNullOrWhiteSpace(message))
+            {
+                sendRawAndFlush($"PRIVMSG #{currentChannel} :{message}");
+            }
+            else
+            {
+                comment("Channel", "Not right condition(channel is null or message is empty or not join channel");
+            }
+        }
+
+        #endregion
+
+        #region ReceiveThread Methods
 
         private void receiveThreadRun()
         {
@@ -85,6 +144,14 @@ namespace Twitch_Analysis_App.Models
                         splitedMessage = data.Split(' ');
                         if (splitedMessage[0] == "PING")
                             sendRawAndFlush("PONG");
+                        //Chat
+                        if (splitedMessage[1] == "PRIVMSG")
+                        {
+                            if (onChat != null)
+                            {
+                                onChat(splitedMessage[2].Substring(1), data.Substring(data.IndexOf(":", 1)));
+                            }
+                        }
                     }
                 }
             }
@@ -126,6 +193,14 @@ namespace Twitch_Analysis_App.Models
                 comment("Writer", "undefined writer stream..");
             }
         }
+
+        #endregion
+
+        #region IRC Event
+
+        public delegate void ChatEventHandler(string sender, string content);
+
+        public ChatEventHandler onChat;
 
         #endregion
 

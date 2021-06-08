@@ -57,7 +57,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\TwitchClient.cs" />
+    <Compile Include="Models\Configuration.cs" />
+    <Compile Include="Models\IRCClient.cs" />
+    <Compile Include="ViewModels\ChattingViewModel.cs" />
+    <Compile Include="ViewModels\Command\ConnectCommand.cs" />
     <Compile Include="ViewModels\Converter\WarningToBrushConverter.cs" />
     <Compile Include="Selector\LogStyleSelector.cs" />
     <Compile Include="Selector\LogTemplateSelector.cs" />
@@ -65,13 +68,16 @@
     <Compile Include="Structure\Message.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="ViewModels\Command\TabCommand.cs" />
-    <Compile Include="ViewModels\Converter\TabTypeToStringConverter.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
+    <Compile Include="ViewModels\TwitchViewModel.cs" />
     <Compile Include="Views\ConfigurationView.xaml.cs">
       <DependentUpon>ConfigurationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DownloadView.xaml.cs">
       <DependentUpon>DownloadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TwitchView.xaml.cs">
+      <DependentUpon>TwitchView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AnalysisView.xaml">
       <SubType>Designer</SubType>
@@ -99,6 +105,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DownloadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TwitchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
