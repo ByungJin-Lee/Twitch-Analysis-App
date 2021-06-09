@@ -81,3 +81,7 @@ Commit Log
         + created View(TwitchView)
         + created ViewModel(TwitchViewModel)
         + created Command(ConnectCommand)
+   
++ 1.3.2 - ViewModel
+    + created Twitch ViewModel
+    + created Twitch View
