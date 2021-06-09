@@ -23,6 +23,9 @@ namespace Twitch_Analysis_App.Models
             public const short COLLECTION_NAME = 5;
             public const short DATABASE_IP = 6;
             public const short DATABASE_PORT = 7;
+            public const short NICK = 8;
+            public const short IRC_IP = 9;
+            public const short Length = 10;
         }
         #endregion
 
@@ -84,7 +87,8 @@ namespace Twitch_Analysis_App.Models
         static public string Database_ip { get => keys[EnviromentKeys.DATABASE_IP]; set => keys[EnviromentKeys.DATABASE_IP] = value; }
         static public string Database_port { get => keys[EnviromentKeys.DATABASE_PORT]; set => keys[EnviromentKeys.DATABASE_PORT] = value; }
         static public string Collection_name { get => keys[EnviromentKeys.COLLECTION_NAME]; set => keys[EnviromentKeys.COLLECTION_NAME] = value; }
-
+        static public string NICK { get => keys[EnviromentKeys.NICK]; set => keys[EnviromentKeys.NICK] = value; }
+        static public string IRC_IP { get => keys[EnviromentKeys.IRC_IP]; set => keys[EnviromentKeys.IRC_IP] = value; }
         #endregion
     }
 }

@@ -7,6 +7,6 @@ using System.Threading.Tasks;
 namespace Twitch_Analysis_App.ViewModels
 {
     class ConfigurationViewModel
-    {
+    {        
     }
 }

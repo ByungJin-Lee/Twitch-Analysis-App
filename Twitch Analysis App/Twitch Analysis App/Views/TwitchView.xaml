@@ -5,26 +5,122 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ViewModels="clr-namespace:Twitch_Analysis_App.ViewModels"
              xmlns:local="clr-namespace:Twitch_Analysis_App.Views"
+             xmlns:Converter="clr-namespace:Twitch_Analysis_App.Converter"
+             xmlns:Selector="clr-namespace:Twitch_Analysis_App.Selector"
+             xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ViewModels:TwitchViewModel x:Key="TwitchViewModel"/>
+
+        <Converter:WarningToBrushConverter x:Key="WarningToBrushConverter"
+                                               TrueBrush="#FFCCCB"
+                                               FalseBrush="#90EE90"/>
+
+
+        <DataTemplate x:Key="Log_Left">
+            <StackPanel Margin="0,1">
+                <DockPanel>
+                    <TextBlock Text="{Binding Source}" FontWeight="Bold" Foreground="White"/>
+                    <TextBlock Margin="5,0,0,0" VerticalAlignment="Bottom" Foreground="White" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="9"/>
+                </DockPanel>
+                <Border Background="{Binding Warning, Converter={StaticResource WarningToBrushConverter}}"
+                            CornerRadius="5"
+                            Padding="8,2"
+                            BorderThickness="0">
+                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="2,1,1,2" Foreground="Black"/>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="Log_Right">
+            <StackPanel Margin="0,1">
+                <DockPanel>
+                    <TextBlock HorizontalAlignment="Right" Foreground="White" Margin="5,0,0,0" VerticalAlignment="Bottom" Text="{Binding Time, StringFormat=hh:mm:ss}" FontSize="9"/>
+                    <TextBlock HorizontalAlignment="Right" Foreground="White" Text="{Binding Source}" FontWeight="Bold"/>
+                </DockPanel>
+                <Border Background="{Binding Warning, Converter={StaticResource WarningToBrushConverter}}"
+                            CornerRadius="5"
+                            Padding="8,2"
+                            BorderThickness="0">
+                    <TextBlock Text="{Binding Content}" TextWrapping="Wrap" Margin="2,1,1,2" Foreground="Black"/>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+
+
+        <Style x:Key="Style_Log_Left" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <ContentPresenter x:Name="PART_ListBoxItem" 
+                                  HorizontalAlignment="Left" 
+                                  Margin="5,0,20,5"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="Style_Log_Right" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <ContentPresenter x:Name="PART_ListBoxItem" 
+                                  HorizontalAlignment="Right" 
+                                  Margin="20,0,5,5"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Selector:LogTemplateSelector x:Key="LogTemplateSelector"
+                                          LeftTemplate="{StaticResource Log_Left}" RightTemplate="{StaticResource Log_Right}"
+                                          PropertyToCheck="Warning" PropertyValue="True"/>
+
+        <Selector:LogStyleSelector x:Key="LogStyleSelector"
+                                       LeftStyle="{StaticResource Style_Log_Left}" RightStyle="{StaticResource Style_Log_Right}"
+                                       PropertyToCheck="Warning" PropertyValue="True"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Content="Connect"
-                Command="{Binding Path=command, Source={StaticResource TwitchViewModel}}"/>
+        <!--#region Controls-->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Connect"
+                Command="{Binding Path=connectCommand, Source={StaticResource TwitchViewModel}}"/>
+            <Button Content="Join"
+                Grid.Column="1"
+                Command="{Binding Path=enterCommand, Source={StaticResource TwitchViewModel}}"
+                CommandParameter="{Binding Path=Text, ElementName=channelTxt}"/>
+            <TextBox Text="sss"
+                   Grid.Column="2"
+                   x:Name="channelTxt"/>
+        </Grid>
+        <!--#endregion-->
+
+        <ListBox Grid.Row="1" Grid.Column="0" 
+                 ItemTemplateSelector="{StaticResource LogTemplateSelector}" Margin="0,5,5,0"
+                 ItemContainerStyleSelector="{StaticResource LogStyleSelector}"
+                 ItemsSource="{Binding Path=LogCollection,Source={StaticResource TwitchViewModel}}">
+        </ListBox>
+        
     </Grid>
 </UserControl>

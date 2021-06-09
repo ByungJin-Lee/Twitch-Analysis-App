@@ -61,11 +61,12 @@
     <Compile Include="Models\IRCClient.cs" />
     <Compile Include="ViewModels\ChattingViewModel.cs" />
     <Compile Include="ViewModels\Command\ConnectCommand.cs" />
+    <Compile Include="ViewModels\Command\EnterCommand.cs" />
     <Compile Include="ViewModels\Converter\WarningToBrushConverter.cs" />
-    <Compile Include="Selector\LogStyleSelector.cs" />
-    <Compile Include="Selector\LogTemplateSelector.cs" />
-    <Compile Include="Structure\Log.cs" />
-    <Compile Include="Structure\Message.cs" />
+    <Compile Include="ViewModels\Selector\LogStyleSelector.cs" />
+    <Compile Include="ViewModels\Selector\LogTemplateSelector.cs" />
+    <Compile Include="Models\Structure\Log.cs" />
+    <Compile Include="Models\Structure\Message.cs" />
     <Compile Include="ViewModels\AnalysisViewModel.cs" />
     <Compile Include="ViewModels\Command\TabCommand.cs" />
     <Compile Include="ViewModels\TabViewModel.cs" />
