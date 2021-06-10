@@ -65,7 +65,7 @@ namespace Twitch_Analysis_App.Models
             finally
             {
                 //End Program
-                receiveMessageThread.Interrupt();
+                if(receiveMessageThread != null) receiveMessageThread.Interrupt();
                 client.Close();
                 isRunning = false;
             }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Threading;
 using Twitch_Analysis_App.Models;
 using Twitch_Analysis_App.Structure;
@@ -17,8 +18,8 @@ namespace Twitch_Analysis_App.ViewModels
     {
         #region Variables
 
-        static private ObservableCollection<Message> messages = new ObservableCollection<Message>();       
-        static private IRCClient client = new IRCClient();
+        static private readonly object _lock = new object();
+        static private ObservableCollection<Message> messages = null;
 
         static public ObservableCollection<Message> MessageCollection { get
             {                
@@ -31,42 +32,23 @@ namespace Twitch_Analysis_App.ViewModels
 
         public ChattingViewModel()
         {
-            client.onChat += onChat;
-            client.logger += alert;
+                      
         }
         #endregion
 
         #region Methods
-        static public void connect()
-        {                        
-            //Configuration File    
-            client.setServer(Configuration.IRC_IP);
-            client.setNick(Configuration.NICK);
-            client.setPassword(Configuration.Auth_irc_token);
-            client.setPort(6667);
-            Thread chatThread = new Thread(client.start);
-            chatThread.Start();                       
-        }
-        static public void join(string channel)
+        
+        static public void init()
         {
-            client.joinChannel(channel);
+            messages = new ObservableCollection<Message>();
+            BindingOperations.EnableCollectionSynchronization(messages, _lock);            
         }
 
-        static public void alert(string tag, string content, bool warning)
-        {            
-            TwitchViewModel.addLog(new Log()
-            {
-                Time = DateTime.Now,
-                Content = content,
-                Source = tag,
-                Warning = warning
-            });
-        }
         #endregion
 
         #region Event
 
-        public void onChat(string sender, string content)
+        static public void onChat(string sender, string content)
         {
             //Add Message to Messages
             messages.Add(new Message()

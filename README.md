@@ -85,3 +85,7 @@ Commit Log
 + 1.3.2 - ViewModel
     + created Twitch ViewModel
     + created Twitch View
+
++ 1.4.0
+    + fixed cross Thread
+    + checked running of Logs Collection

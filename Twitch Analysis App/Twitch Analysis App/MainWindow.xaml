@@ -216,7 +216,7 @@
             <ListBox Background="Transparent" 
                      ItemTemplate="{StaticResource ChattingTemplate}" 
                      BorderThickness="0"
-                     ItemsSource="{Binding Path=MessageCollection, Source={StaticResource ChatViewModel}}">
+                     ItemsSource="{Binding MessageCollection, Source={StaticResource ChatViewModel}}">
             </ListBox>
         </Border>
         <!--#endregion-->
