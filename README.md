@@ -89,3 +89,5 @@ Commit Log
 + 1.4.0
     + fixed cross Thread
     + checked running of Logs Collection
++ 1.4.1
+    + Improved README
