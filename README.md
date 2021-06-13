@@ -94,3 +94,5 @@ Commit Log
 + 1.4.21
     + IRCClient
         + allocated TIMEOUT on Connection
++ 1.4.3
+    + Improved Folder Structure
