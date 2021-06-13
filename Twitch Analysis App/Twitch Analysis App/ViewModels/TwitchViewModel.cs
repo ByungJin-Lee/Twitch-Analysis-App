@@ -41,8 +41,7 @@ namespace Twitch_Analysis_App.ViewModels
         public TwitchViewModel()
         {
             client = new IRCClient();
-            client.logger += write_log;
-            irc_worker = new Thread(client.start);
+            client.logger += write_log;            
 
             BindingOperations.EnableCollectionSynchronization(logs, _lock);            
 
@@ -67,8 +66,9 @@ namespace Twitch_Analysis_App.ViewModels
             client.setServer(Configuration.IRC_IP);
             client.setNick(Configuration.NICK);
             client.setPassword(Configuration.Auth_irc_token);
-            client.setPort(6667);            
-            irc_worker.Start();
+            client.setPort(6667);
+            irc_worker = new Thread(client.start);
+            irc_worker.Start();            
         }
         public bool canEnterExecute(object parameter)
         {            

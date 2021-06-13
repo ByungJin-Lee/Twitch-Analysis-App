@@ -12,10 +12,10 @@ namespace Twitch_Analysis_App.Models
         private string server = null;
         private string nick = null;
         private string password = null;
-        private int port = -1;
+        private int port = -1;        
         private bool isRunning = false;
-        private string currentChannel = null;
-        private bool isJoin = false;
+        private string currentChannel = null;        
+        private bool isJoin = false;        
 
         private TcpClient client = null;
         private StreamWriter writer = null;
@@ -36,11 +36,8 @@ namespace Twitch_Analysis_App.Models
             if (!this.isCheck() || isRunning) return;
 
             try
-            {
-                client = new TcpClient();
-                client.Connect(server, port);
-
-                if (client.Connected)
+            {                
+                if (connect())
                 {
                     //Init
                     Stream stream = client.GetStream();
@@ -51,12 +48,9 @@ namespace Twitch_Analysis_App.Models
                     isRunning = true;
                     receiveMessageThread.Start();
                     sendAuthInformation();
-                }                
-                //I have to send PING to Server every five minute                
-                while (client.Connected)
-                {
                     //LOOP
-                }
+                    while (client.Connected) {}
+                }                        
             }
             catch (Exception x)
             {
@@ -70,7 +64,20 @@ namespace Twitch_Analysis_App.Models
                 isRunning = false;
             }
         }
+        public bool connect()
+        {
+            client = new TcpClient();            
+            var result = client.BeginConnect(server, port, null, null);
 
+            if (result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1)))
+            {
+                client.EndConnect(result);
+                comment("Connect", "Success", false);
+                return true;
+            }
+            comment("Connect", "Fail...", true);
+            return true;
+        }
         #endregion
 
         #region IRC Methods

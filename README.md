@@ -91,3 +91,6 @@ Commit Log
     + checked running of Logs Collection
 + 1.4.1
     + Improved README
++ 1.4.21
+    + IRCClient
+        + allocated TIMEOUT on Connection
