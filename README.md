@@ -3,6 +3,8 @@ Twitch-Analysis-App
 Summary
 ---
 
++ Developer - byungjin.dev@gmail.com
+
 This Application is advanced Twitch Analysis Application in Java.
 
 The reason why i make this application, Java's GUI is not good at modern design.
@@ -96,3 +98,6 @@ Commit Log
         + allocated TIMEOUT on Connection
 + 1.4.3
     + Improved Folder Structure
++ 1.4.31
+    + Updated README
+        + writed Developer's name
