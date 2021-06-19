@@ -15,12 +15,13 @@ namespace Twitch_Analysis_App.Models
         private int port = -1;        
         private bool isRunning = false;
         private string currentChannel = null;        
-        private bool isJoin = false;        
+        private bool isJoin = false;
+        private bool exit = false;
 
         private TcpClient client = null;
         private StreamWriter writer = null;
         private StreamReader reader = null;
-        private Thread receiveMessageThread = null;
+        private Thread receiveMessageThread = null;        
 
         public delegate void CommentHandler(string sender, string content, bool warning);
         public CommentHandler logger = null;
@@ -49,7 +50,7 @@ namespace Twitch_Analysis_App.Models
                     receiveMessageThread.Start();
                     sendAuthInformation();
                     //LOOP
-                    while (client.Connected) {}
+                    while (client.Connected && !exit) {}
                 }                        
             }
             catch (Exception x)
@@ -59,8 +60,8 @@ namespace Twitch_Analysis_App.Models
             finally
             {
                 //End Program
-                if(receiveMessageThread != null) receiveMessageThread.Interrupt();
-                client.Close();
+                if(receiveMessageThread != null) receiveMessageThread.Abort();
+                stop();
                 isRunning = false;
             }
         }
@@ -77,6 +78,13 @@ namespace Twitch_Analysis_App.Models
             }
             comment("Connect", "Fail...", true);
             return true;
+        }
+        public void stop()
+        {
+            if(client != null && client.Connected)
+            {
+                exit = true;           
+            }
         }
         #endregion
 
@@ -151,19 +159,19 @@ namespace Twitch_Analysis_App.Models
                 {
                     data = reader.ReadLine();
                     if (!String.IsNullOrEmpty(data))
-                    {
-                        comment("Reader", data, false);
+                    {                        
                         splitedMessage = data.Split(' ');
                         if (splitedMessage[0] == "PING")
                             sendRawAndFlush("PONG");
-                        //Chat
-                        if (splitedMessage[1] == "PRIVMSG")
+                        //Chat Event
+                        if (splitedMessage[1] == "PRIVMSG" && onChat != null)
                         {
-                            if (onChat != null)
-                            {
-                                onChat(splitedMessage[2].Substring(1), data.Substring(data.IndexOf(":", 1)));
-                            }
-                        }
+                            onChat(data.Substring(1, data.IndexOf('!') - 1), data.Substring(data.LastIndexOf(":") + 1));
+                        }                            
+                        else
+                        {
+                            comment("Reader", data, false);
+                        }                         
                     }
                 }
             }

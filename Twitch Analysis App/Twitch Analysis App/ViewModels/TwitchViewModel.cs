@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Threading;
 using Twitch_Analysis_App.Models;
 using Twitch_Analysis_App.Structure;
 using Twitch_Analysis_App.ViewModels.Command;
@@ -37,7 +30,7 @@ namespace Twitch_Analysis_App.ViewModels
             } }
         #endregion
 
-        #region Constructor
+        #region Constructor & Destructor
         public TwitchViewModel()
         {
             client = new IRCClient();
@@ -47,7 +40,14 @@ namespace Twitch_Analysis_App.ViewModels
 
             connectCommand = new ConnectCommand(connectExecute, canConnectExecute);
             enterCommand = new EnterCommand(enterExecute, canEnterExecute);            
-        }     
+        }    
+        ~TwitchViewModel()
+        {
+            if(client != null)
+            {
+                client.stop();
+            }
+        }
         #endregion
 
         #region Execute&Can
@@ -75,9 +75,8 @@ namespace Twitch_Analysis_App.ViewModels
             return true;
         }
         public void enterExecute(object parameter)
-        {
-            ChattingViewModel.init();
-            client.onChat += ChattingViewModel.onChat;            
+        {            
+            client.onChat += ChattingViewModel.onChat;
             client.joinChannel((string)parameter);
         }
         #endregion

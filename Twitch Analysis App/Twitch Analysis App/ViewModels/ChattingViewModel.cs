@@ -19,37 +19,31 @@ namespace Twitch_Analysis_App.ViewModels
         #region Variables
 
         static private readonly object _lock = new object();
-        static private ObservableCollection<Message> messages = null;
+        static private ObservableCollection<Message> messages = new ObservableCollection<Message>();
 
-        static public ObservableCollection<Message> MessageCollection { get
+        static public ObservableCollection<Message> Messages {
+            get
             {                
                 return messages;
-            } }
-
+            }                        
+        }
         #endregion
 
         #region Constructor
-
         public ChattingViewModel()
         {
                       
         }
-        #endregion
-
-        #region Methods
-        
-        static public void init()
+        static ChattingViewModel()
         {
-            messages = new ObservableCollection<Message>();
-            BindingOperations.EnableCollectionSynchronization(messages, _lock);            
+            BindingOperations.EnableCollectionSynchronization(messages, _lock);
         }
-
-        #endregion
+        #endregion            
 
         #region Event
 
         static public void onChat(string sender, string content)
-        {
+        {            
             //Add Message to Messages
             messages.Add(new Message()
             {
@@ -59,7 +53,6 @@ namespace Twitch_Analysis_App.ViewModels
                 IsMine = false,
             });
         }
-
         #endregion
     }
 }

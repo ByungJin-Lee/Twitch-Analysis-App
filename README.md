@@ -103,3 +103,8 @@ Commit Log
         + writed Developer's name
 + 1.4.4
     + Check Environment
++ 1.4.5
+    + ChattingViewModel
+        + Binding MessageCollection
+    + IRCClient
+        + Updated OnChat Event        
