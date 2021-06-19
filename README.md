@@ -101,3 +101,5 @@ Commit Log
 + 1.4.31
     + Updated README
         + writed Developer's name
++ 1.4.4
+    + Check Environment
