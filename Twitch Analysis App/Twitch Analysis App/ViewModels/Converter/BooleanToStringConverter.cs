@@ -1,17 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace Twitch_Analysis_App.ViewModels.Converter
 {
-    class WarningToBrushConverter : IValueConverter
+    class BooleanToStringConverter : IValueConverter
     {
-        public Brush TrueBrush { get; set; }
-        public Brush FalseBrush { get; set; }
+        public string TrueString { get; set; }
+        public string FalseString { get; set; }
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? TrueBrush : FalseBrush;
+            return (bool)value ? TrueString : FalseString;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

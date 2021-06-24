@@ -5,18 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ViewModels="clr-namespace:Twitch_Analysis_App.ViewModels"
              xmlns:local="clr-namespace:Twitch_Analysis_App.Views"
-             xmlns:Converter="clr-namespace:Twitch_Analysis_App.Converter"
+             xmlns:Converters="clr-namespace:Twitch_Analysis_App.ViewModels.Converter"
              xmlns:Selector="clr-namespace:Twitch_Analysis_App.Selector"
              xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ViewModels:TwitchViewModel x:Key="TwitchViewModel"/>
-
-        <Converter:WarningToBrushConverter x:Key="WarningToBrushConverter"
+        <Converters:WarningToBrushConverter x:Key="WarningToBrushConverter"
                                                TrueBrush="#FFCCCB"
                                                FalseBrush="#90EE90"/>
-
+        <Converters:BooleanToStringConverter x:Key="ConnectToStringConverter" TrueString="Disconnect" FalseString="Connect"/>
+        <Converters:BooleanToStringConverter x:Key="JoinToStringConverter" TrueString="Exit" FalseString="Join"/>
 
         <DataTemplate x:Key="Log_Left">
             <StackPanel Margin="0,1">
@@ -104,9 +103,9 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="Connect"
+            <Button Content="{Binding Path=IsConnect, Source={StaticResource TwitchViewModel}, Converter={StaticResource ConnectToStringConverter}}"
                 Command="{Binding Path=connectCommand, Source={StaticResource TwitchViewModel}}"/>
-            <Button Content="Join"
+            <Button Content="{Binding Path=IsJoin, Source={StaticResource TwitchViewModel}, Converter={StaticResource JoinToStringConverter}}"
                 Grid.Column="1"
                 Command="{Binding Path=enterCommand, Source={StaticResource TwitchViewModel}}"
                 CommandParameter="{Binding Path=Text, ElementName=channelTxt}"/>

@@ -58,7 +58,7 @@ namespace Twitch_Analysis_App.Models
                 keys = File.ReadAllLines(@"./TAConfiguration.txt");
                 return true;
             }
-            catch (Exception x)
+            catch
             {
                 keys = new string[8];
                 return false;

@@ -5,7 +5,10 @@ using System.Windows.Media;
 
 namespace Twitch_Analysis_App.ViewModels.Converter
 {
-    class WarningToBrushConverter : IValueConverter
+    /// <summary>
+    /// This Converter for On/Off value To Color
+    /// </summary>
+    class BooleanToColorBrushConverter : IValueConverter
     {
         public Brush TrueBrush { get; set; }
         public Brush FalseBrush { get; set; }

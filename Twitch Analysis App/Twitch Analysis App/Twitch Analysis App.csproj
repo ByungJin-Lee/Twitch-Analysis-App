@@ -62,6 +62,8 @@
     <Compile Include="ViewModels\ChattingViewModel.cs" />
     <Compile Include="ViewModels\Command\ConnectCommand.cs" />
     <Compile Include="ViewModels\Command\EnterCommand.cs" />
+    <Compile Include="ViewModels\Converter\BooleanToColorBrushConverter.cs" />
+    <Compile Include="ViewModels\Converter\BooleanToStringConverter.cs" />
     <Compile Include="ViewModels\Converter\WarningToBrushConverter.cs" />
     <Compile Include="ViewModels\Selector\LogStyleSelector.cs" />
     <Compile Include="ViewModels\Selector\LogTemplateSelector.cs" />

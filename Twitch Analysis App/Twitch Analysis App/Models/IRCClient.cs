@@ -12,11 +12,12 @@ namespace Twitch_Analysis_App.Models
         private string server = null;
         private string nick = null;
         private string password = null;
-        private int port = -1;        
-        private bool isRunning = false;
-        private string currentChannel = null;        
-        private bool isJoin = false;
-        private bool exit = false;
+        private string currentChannel = null;
+
+        private int port = -1;                        
+
+        private bool isConnect = false;
+        private bool isJoin = false;        
 
         private TcpClient client = null;
         private StreamWriter writer = null;
@@ -28,13 +29,19 @@ namespace Twitch_Analysis_App.Models
 
         public delegate void ChatEventHandler(string sender, string content);
         public ChatEventHandler onChat;
+
+        public delegate void ControllHandler();
+        public ControllHandler OnConnect;
+        public ControllHandler OnJoin;
+        public ControllHandler OnExit;
+        public ControllHandler OnDisconnet;
         #endregion
 
         #region Methods
 
         public void start()
         {
-            if (!this.isCheck() || isRunning) return;
+            if (!isCheck() || isConnect) return;
 
             try
             {                
@@ -44,13 +51,11 @@ namespace Twitch_Analysis_App.Models
                     Stream stream = client.GetStream();
                     writer = new StreamWriter(stream);
                     reader = new StreamReader(stream);
-                    receiveMessageThread = new Thread(receiveThreadRun);
-                    //Start
-                    isRunning = true;
+                    receiveMessageThread = new Thread(receiveThreadRun);                                        
                     receiveMessageThread.Start();
-                    sendAuthInformation();
+                    sendAuthInformation();                    
                     //LOOP
-                    while (client.Connected && !exit) {}
+                    while (client.Connected) {}
                 }                        
             }
             catch (Exception x)
@@ -59,10 +64,7 @@ namespace Twitch_Analysis_App.Models
             }
             finally
             {
-                //End Program
-                if(receiveMessageThread != null) receiveMessageThread.Abort();
-                stop();
-                isRunning = false;
+                disconnect();
             }
         }
         public bool connect()
@@ -73,18 +75,27 @@ namespace Twitch_Analysis_App.Models
             if (result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1)))
             {
                 client.EndConnect(result);
-                comment("Connect", "Success", false);
+                isConnect = true;
+                if (OnConnect != null) OnConnect();
+                comment("Connect", "Success", false);                
                 return true;
             }
-            comment("Connect", "Fail...", true);
-            return true;
-        }
-        public void stop()
-        {
-            if(client != null && client.Connected)
+            else
             {
-                exit = true;           
-            }
+                comment("Connect", "Fail...", true);
+                return false;
+            }            
+        }
+        public void disconnect()
+        {
+            if (!isConnect) return;
+
+            receiveMessageThread.Abort();
+            writer.Close();
+            reader.Close();            
+            client.Close();
+            isConnect = false;
+            if (OnDisconnet != null) OnDisconnet();
         }
         #endregion
 
@@ -107,9 +118,10 @@ namespace Twitch_Analysis_App.Models
             if (!String.IsNullOrEmpty(currentChannel) && !isJoin)
             {
                 if(sendRawAndFlush("JOIN #" + currentChannel))
-                {
-                    comment("Channel", "Join Channel", false);
+                {                    
                     isJoin = true;
+                    comment("Channel", "Join Channel", false);
+                    if (OnJoin != null) OnJoin();
                 }                
             }
             else
@@ -120,12 +132,13 @@ namespace Twitch_Analysis_App.Models
 
         public void outChannel()
         {
-            if (isJoin && String.IsNullOrEmpty(currentChannel))
+            if (isJoin && !String.IsNullOrEmpty(currentChannel))
             {
                 sendRawAndFlush("PART #" + currentChannel);
                 currentChannel = null;
                 isJoin = false;
                 comment("Channel", "Out from Channel", false);
+                if (OnExit != null) OnExit();
             }
             else
             {
@@ -148,14 +161,13 @@ namespace Twitch_Analysis_App.Models
         #endregion
 
         #region ReceiveThread Methods
-
         private void receiveThreadRun()
         {
             if (reader != null)
             {
                 string data = null;
                 string[] splitedMessage = null;
-                while (client.Connected)
+                while (client.Connected && isConnect)
                 {
                     data = reader.ReadLine();
                     if (!String.IsNullOrEmpty(data))
@@ -240,11 +252,7 @@ namespace Twitch_Analysis_App.Models
                 this.server = server;
             else
                 comment("Error", "parmeter 'server' is null or empty.", true);
-        }
-        public bool IsRunning()
-        {
-            return this.isRunning;
-        }
+        }        
         public void setPort(int port)
         {
             if (port < 0)

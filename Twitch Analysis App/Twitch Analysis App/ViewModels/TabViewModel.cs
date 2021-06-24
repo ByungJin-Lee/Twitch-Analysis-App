@@ -16,6 +16,8 @@ namespace Twitch_Analysis_App.ViewModels
         public TabViewModel()
         {
             TabCommand = new TabCommand(work, canExcuted);
+            //Landing View Setting
+            Tab = new TwitchView();
         }
         public ICommand TabCommand { get; set; }
 

@@ -25,6 +25,7 @@ namespace Twitch_Analysis_App
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new TwitchView();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -33,21 +34,6 @@ namespace Twitch_Analysis_App
             {
                 DragMove();
             }
-        }
-        private void clickTabButton(object sender, RoutedEventArgs e)
-        {            
-            switch((sender as RadioButton).Content)
-            {
-                case "Twitch Analysis":
-                    DataContext = new AnalysisView();
-                    break;
-                case "Configuration":
-                    DataContext = new ConfigurationView();
-                    break;
-                case "Download":
-                    DataContext = new DownloadView();
-                    break;
-            }            
         }
 
         private void exitClick(object sender, RoutedEventArgs e)

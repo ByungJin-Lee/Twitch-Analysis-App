@@ -108,3 +108,13 @@ Commit Log
         + Binding MessageCollection
     + IRCClient
         + Updated OnChat Event        
+   
++ 1.5.0
+    + Updated Main Design
+        + added TCP Status display
+    + added IRC Client Event
+        + OnConnect
+        + OnDisconnet
+        + OnJoin
+        + OnExit
+    + added Landing Page

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewModels="clr-namespace:Twitch_Analysis_App.ViewModels"
+        xmlns:Converters="clr-namespace:Twitch_Analysis_App.ViewModels.Converter"
         xmlns:Views="clr-namespace:Twitch_Analysis_App.Views"
         xmlns:local="clr-namespace:Twitch_Analysis_App"
         xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"                
@@ -18,10 +19,14 @@
     <Window.Resources>
         <ViewModels:TabViewModel x:Key="TabViewModel"/>
         <ViewModels:ChattingViewModel x:Key="ChatViewModel"/>
+        <Converters:BooleanToColorBrushConverter x:Key="BooleanToColorBrushConverter" TrueBrush="#90EE90" FalseBrush="#FFCCCB"/>
+        <!--on/off-->
+        <Converters:BooleanToStringConverter x:Key="BooleanToONOFFConverter" TrueString="ON" FalseString="OFF"/>
     </Window.Resources>
 
     <!--#endregion-->
     
+    <!--#region Grid Area-->    
     <Grid>
         
         <!--#region Grid Resource-->
@@ -81,8 +86,8 @@
         
         <!--#endregion-->
         
-        <!--#region Menubar-->        
-        
+        <!--#region Menubar-->
+
         <Grid Background="#0F0F2D"
               Grid.ColumnSpan="2"
               MouseDown="Grid_MouseDown">
@@ -159,6 +164,12 @@
                        FontFamily="Assets/Fonts/#Dosis"
                        FontWeight="Medium"/>
 
+            <!--#region Status Items-->
+            <TextBlock Grid.Column="4" FontFamily="Assets/Fonts/#Dosis" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Connect" Foreground="{Binding Path=IsConnect, Source={StaticResource TwitchViewModel} , Converter={StaticResource BooleanToColorBrushConverter}}"/>
+            <TextBlock Grid.Column="5" FontFamily="Assets/Fonts/#Dosis" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Join" Foreground="{Binding Path=IsJoin, Source={StaticResource TwitchViewModel} , Converter={StaticResource BooleanToColorBrushConverter}}"/>
+            <TextBlock Grid.Column="7" FontFamily="Assets/Fonts/#Dosis" Foreground="#fff" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Channel, Source={StaticResource TwitchViewModel}}"/>
+            <!--#endregion-->
+
             <Grid Grid.Column="8" Grid.Row="0" Margin="2,2,2,2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -197,29 +208,33 @@
         </Grid>
         
         <!--#endregion-->
-                
+        
         <!--#region Content-->
-        
-        <ContentControl Grid.Row="1"
-                        Margin="5,5,5,5"
+        <Grid Grid.Row="1"
+              Margin="5,5,5,5">            
+            <!--#region Panel-->
+            <ContentControl                         
                         Content="{Binding Path=Tab, Source={StaticResource TabViewModel}}"/>
-
-        <!--#endregion-->
+            <!--#endregion-->            
+        </Grid>
+        <!--#endregion-->                            
         
-        <!--#region Chatting-->        
+        <!--#region Chatting View-->
         <Border BorderBrush="Wheat"
                     BorderThickness="1"
                     Grid.Row="1"
                     Grid.Column="1"
                     Margin="5,5"
                     Background="#000051">
-            <ListBox Background="Transparent" 
-                     ItemTemplate="{StaticResource ChattingTemplate}" 
-                     BorderThickness="0"
-                     ItemsSource="{Binding Path=Messages , Source={StaticResource ChatViewModel}}">
-            </ListBox>
+            <ListBox Grid.Row="0"                                                 
+                        Background="Transparent" 
+                        ItemTemplate="{StaticResource ChattingTemplate}" 
+                        BorderThickness="0"
+                         
+                        ItemsSource="{Binding Path=Messages , Source={StaticResource ChatViewModel}}">
+                </ListBox>
         </Border>
         <!--#endregion-->
-
     </Grid>
+    <!--#endregion-->
 </Window>
