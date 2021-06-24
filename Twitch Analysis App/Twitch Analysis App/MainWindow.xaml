@@ -15,26 +15,26 @@
         Background="#181735">
 
     <!--#region Window Resource-->
-
     <Window.Resources>
+        <!--#region ViewModels-->
         <ViewModels:TabViewModel x:Key="TabViewModel"/>
         <ViewModels:ChattingViewModel x:Key="ChatViewModel"/>
-        <Converters:BooleanToColorBrushConverter x:Key="BooleanToColorBrushConverter" TrueBrush="#90EE90" FalseBrush="#FFCCCB"/>
-        <!--on/off-->
-        <Converters:BooleanToStringConverter x:Key="BooleanToONOFFConverter" TrueString="ON" FalseString="OFF"/>
-    </Window.Resources>
+        <!--#endregion-->
 
+        <!--#region Converters-->
+        <Converters:BooleanToColorBrushConverter x:Key="BooleanToColorBrushConverter" TrueBrush="#90EE90" FalseBrush="#FFCCCB"/>
+        <Converters:BooleanToStringConverter x:Key="BooleanToONOFFConverter" TrueString="ON" FalseString="OFF"/>
+        <!--#endregion-->
+    </Window.Resources>
     <!--#endregion-->
     
     <!--#region Grid Area-->    
     <Grid>
         
-        <!--#region Grid Resource-->
-        
+        <!--#region Grid Resource-->        
         <Grid.Resources>
             <ControlTemplate x:Key="tabRadioButton" TargetType="{x:Type RadioButton}">
                 <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
-                
                 <ControlTemplate.Triggers>
                     <Trigger
                         Property="IsChecked"
@@ -66,14 +66,12 @@
                     </Border>
                 </StackPanel>
             </DataTemplate>
-            
-            
+
         </Grid.Resources>
         
         <!--#endregion-->
 
-        <!--#region Grid Definition-->
-        
+        <!--#region Grid Definition-->        
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
@@ -83,11 +81,9 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
         <!--#endregion-->
         
         <!--#region Menubar-->
-
         <Grid Background="#0F0F2D"
               Grid.ColumnSpan="2"
               MouseDown="Grid_MouseDown">
@@ -175,7 +171,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <Button Content="_"                                  
                     Foreground="White"
                         Grid.Column="0"
@@ -204,9 +200,8 @@
 
             </Grid>
             <!--#endregion-->
-            
+
         </Grid>
-        
         <!--#endregion-->
         
         <!--#region Content-->

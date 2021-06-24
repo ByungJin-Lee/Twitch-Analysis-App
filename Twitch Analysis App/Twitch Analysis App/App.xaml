@@ -15,5 +15,6 @@
         <SolidColorBrush x:Key="DefaultChatTitleBrush"
                          Color="White"/>
         <ViewModels:TwitchViewModel x:Key="TwitchViewModel"/>
+                
     </Application.Resources>
 </Application>

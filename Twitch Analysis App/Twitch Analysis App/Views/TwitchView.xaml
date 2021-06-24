@@ -10,13 +10,17 @@
              xmlns:Structure="clr-namespace:Twitch_Analysis_App.Structure"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--#region User Resource-->
     <UserControl.Resources>
-        <Converters:WarningToBrushConverter x:Key="WarningToBrushConverter"
+        <!--#region Converters-->
+        <Converters:BooleanToColorBrushConverter x:Key="WarningToBrushConverter"
                                                TrueBrush="#FFCCCB"
                                                FalseBrush="#90EE90"/>
         <Converters:BooleanToStringConverter x:Key="ConnectToStringConverter" TrueString="Disconnect" FalseString="Connect"/>
         <Converters:BooleanToStringConverter x:Key="JoinToStringConverter" TrueString="Exit" FalseString="Join"/>
-
+        <!--#endregion-->
+        
+        <!--#region Console Log Template & Style-->
         <DataTemplate x:Key="Log_Left">
             <StackPanel Margin="0,1">
                 <DockPanel>
@@ -85,41 +89,87 @@
         <Selector:LogStyleSelector x:Key="LogStyleSelector"
                                        LeftStyle="{StaticResource Style_Log_Left}" RightStyle="{StaticResource Style_Log_Right}"
                                        PropertyToCheck="Warning" PropertyValue="True"/>
+        <!--#endregion-->
     </UserControl.Resources>
+    <!--#endregion-->
+    
     <Grid>
+        <!--#region Grid Defindtions-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="25"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
+        <!--#endregion-->
+        
         <!--#region Controls-->
-        <Grid>
+        <Grid Margin="0,5,5,0">
+            <!--#region Grid Definditions-->            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Content="{Binding Path=IsConnect, Source={StaticResource TwitchViewModel}, Converter={StaticResource ConnectToStringConverter}}"
-                Command="{Binding Path=connectCommand, Source={StaticResource TwitchViewModel}}"/>
-            <Button Content="{Binding Path=IsJoin, Source={StaticResource TwitchViewModel}, Converter={StaticResource JoinToStringConverter}}"
-                Grid.Column="1"
-                Command="{Binding Path=enterCommand, Source={StaticResource TwitchViewModel}}"
-                CommandParameter="{Binding Path=Text, ElementName=channelTxt}"/>
-            <TextBox Text="sss"
-                   Grid.Column="2"
-                   x:Name="channelTxt"/>
-        </Grid>
-        <!--#endregion-->
+            <!--#endregion-->
+            
+            <!--#region Channel-->            
+            <TextBox Text=""                   
+                x:Name="channelTxt">
+                <TextBox.Resources>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Background" Value="LightCyan"/>
+                        <Style.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
 
+                <!--#endregion-->
+
+            <!--#region Connect & Join-->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#000"/>
+                        <Setter Property="Foreground" Value="#fff"/>
+                        <Setter Property="Margin" Value="2,0,0,0"/>
+                        <Style.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="4"/>
+                            </Style>
+                        </Style.Resources>
+                    </Style>
+                </Grid.Resources>
+
+                <Button Content="{Binding Path=IsConnect, Source={StaticResource TwitchViewModel}, Converter={StaticResource ConnectToStringConverter}}"
+                        Command="{Binding Path=connectCommand, Source={StaticResource TwitchViewModel}}"/>
+
+                <Button Content="{Binding Path=IsJoin, Source={StaticResource TwitchViewModel}, Converter={StaticResource JoinToStringConverter}}"
+                        Grid.Column="1"
+                        Command="{Binding Path=enterCommand, Source={StaticResource TwitchViewModel}}"
+                        CommandParameter="{Binding Path=Text, ElementName=channelTxt}"/>
+
+
+            </Grid>
+            <!--#endregion-->            
+            
+        </Grid>
+        <!--#endregion-->        
+        <!--#region Console-->
         <ListBox Grid.Row="1" Grid.Column="0" 
                  ItemTemplateSelector="{StaticResource LogTemplateSelector}" Margin="0,5,5,0"
                  ItemContainerStyleSelector="{StaticResource LogStyleSelector}"
                  ItemsSource="{Binding Path=LogCollection,Source={StaticResource TwitchViewModel}}">
         </ListBox>
-        
+        <!--#endregion-->
     </Grid>
 </UserControl>

@@ -118,3 +118,8 @@ Commit Log
         + OnJoin
         + OnExit
     + added Landing Page
++ 1.5.1
+    + removed using that not used
+    + improved Design
+        + added corner
+        + layout

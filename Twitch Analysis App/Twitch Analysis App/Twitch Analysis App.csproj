@@ -64,7 +64,6 @@
     <Compile Include="ViewModels\Command\EnterCommand.cs" />
     <Compile Include="ViewModels\Converter\BooleanToColorBrushConverter.cs" />
     <Compile Include="ViewModels\Converter\BooleanToStringConverter.cs" />
-    <Compile Include="ViewModels\Converter\WarningToBrushConverter.cs" />
     <Compile Include="ViewModels\Selector\LogStyleSelector.cs" />
     <Compile Include="ViewModels\Selector\LogTemplateSelector.cs" />
     <Compile Include="Models\Structure\Log.cs" />

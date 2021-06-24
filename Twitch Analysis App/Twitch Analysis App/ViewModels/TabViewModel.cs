@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Twitch_Analysis_App.ViewModels.Command;
@@ -61,7 +56,6 @@ namespace Twitch_Analysis_App.ViewModels
                 }                
             }            
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
